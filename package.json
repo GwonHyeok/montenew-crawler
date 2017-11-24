@@ -1,0 +1,15 @@
+{
+  "name": "montenew-crawler",
+  "version": "1.0.0",
+  "description": "montenew 크롤러 서비스",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node index.js"
+  },
+  "author": "GHyeok",
+  "license": "ISC",
+  "dependencies": {
+    "node-cron": "^1.2.1"
+  }
+}
