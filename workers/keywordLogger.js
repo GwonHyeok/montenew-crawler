@@ -7,22 +7,26 @@ const OpenApiRestClient = require('../modules/openApi/openApiRestClient');
 const openApiRestClient = new OpenApiRestClient(process.env.OPEN_API_KEY, process.env.OPEN_API_SECRET);
 const SearchClient = require('../modules/openApi/restClient/searchClient');
 
+// Naver Mobile Client
+const MobileSearchClient = require('../modules/naverMobile/searchClient');
+
 class KeywordLogger extends Worker {
 
   constructor() {
     super();
-    this.searchClient = new SearchClient(openApiRestClient);
+    // this.searchClient = new SearchClient(openApiRestClient);
+    this.searchClient = new MobileSearchClient();
   }
 
   async work() {
     const keywords = await Keyword.find();
     for (let i = 0; i < keywords.length; i++) {
       const { _id, targetUri, title } = keywords[i];
-      const display = 100;
-      const max = 1000;
+      const display = 15;
+      const max = 150;
 
       // 키워드 랭킹 확인
-      for (let start = 1; i < max; start += display) {
+      for (let start = 1; start < max; start += display) {
         const blogList = await this.searchClient.blog(title, start, display);
 
         // 아이템 주소 수정하고, 아이템에 랭크 정보를 넣어줌
