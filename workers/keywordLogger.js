@@ -8,6 +8,8 @@ const openApiRestClient = new OpenApiRestClient(process.env.OPEN_API_KEY, proces
 const SearchClient = require('../modules/openApi/restClient/searchClient');
 
 // Naver Mobile Client
+const HttpClient = require('../modules/naverMobile/httpClient');
+const httpClient = new HttpClient();
 const MobileSearchClient = require('../modules/naverMobile/searchClient');
 
 class KeywordLogger extends Worker {
@@ -15,7 +17,7 @@ class KeywordLogger extends Worker {
   constructor() {
     super();
     // this.searchClient = new SearchClient(openApiRestClient);
-    this.searchClient = new MobileSearchClient();
+    this.searchClient = new MobileSearchClient(httpClient);
   }
 
   async work() {
