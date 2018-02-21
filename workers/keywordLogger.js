@@ -43,11 +43,6 @@ class KeywordLogger extends Worker {
           const item = items[0];
           const keywordLog = new KeywordLog(Object.assign({}, { keyword: _id, rank: item.rank }, item));
           await keywordLog.save();
-
-          // 키워드 로그에 추가
-          const keyword = await Keyword.findById(_id);
-          keyword.logs.push(keywordLog._id);
-          await keyword.save();
           break;
         }
       }
